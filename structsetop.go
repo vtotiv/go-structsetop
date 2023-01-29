@@ -1,7 +1,5 @@
 package structsetop
 
-// package main
-
 func Union() {
 
 }
