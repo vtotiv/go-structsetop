@@ -25,10 +25,12 @@ func TestIntersection(t *testing.T) {
 	arrOfA := []A{{1}, {2}, {3}}
 	arrOfB := []B{{2}, {3}, {4}}
 	arrOfC := []C{{4}, {5}}
+	arrOfB2 := []B{}
 
 	expectIntersectionAB := []A{{2}, {3}}
 	expectIntersectionAC := []A{}
 	expectIntersectionBC := []B{{4}}
+	expectIntersectionAB2 := []A{}
 
 	equalAB := func(a *A, b *B) bool {
 		return a.va == b.vb
@@ -43,6 +45,7 @@ func TestIntersection(t *testing.T) {
 	assert.Equal(t, expectIntersectionAB, Intersection(arrOfA, arrOfB, equalAB))
 	assert.Equal(t, expectIntersectionAC, Intersection(arrOfA, arrOfC, equalAC))
 	assert.Equal(t, expectIntersectionBC, Intersection(arrOfB, arrOfC, equalBC))
+	assert.Equal(t, expectIntersectionAB2, Intersection(arrOfA, arrOfB2, equalAB))
 }
 
 func TestDifference(t *testing.T) {
