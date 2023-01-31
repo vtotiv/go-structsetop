@@ -49,7 +49,33 @@ func TestIntersection(t *testing.T) {
 }
 
 func TestDifference(t *testing.T) {
+	arrOfA := []A{{1}, {2}, {3}}
+	arrOfB := []B{{2}, {3}, {4}}
+	arrOfC := []C{{4}, {5}}
+	arrOfA2 := []A{}
+	arrOfB2 := []B{}
 
+	expectDifferenceAB := []A{{1}}
+	expectDifferenceAC := []A{{1}, {2}, {3}}
+	expectDifferenceBC := []B{{2}, {3}}
+	expectDifferenceA2B := []A{}
+	expectDifferenceAB2 := []A{{1}, {2}, {3}}
+
+	equalAB := func(a *A, b *B) bool {
+		return a.va == b.vb
+	}
+	equalAC := func(a *A, c *C) bool {
+		return a.va == c.vc
+	}
+	equalBC := func(b *B, c *C) bool {
+		return b.vb == c.vc
+	}
+
+	assert.Equal(t, expectDifferenceAB, Difference(arrOfA, arrOfB, equalAB))
+	assert.Equal(t, expectDifferenceAC, Difference(arrOfA, arrOfC, equalAC))
+	assert.Equal(t, expectDifferenceBC, Difference(arrOfB, arrOfC, equalBC))
+	assert.Equal(t, expectDifferenceA2B, Difference(arrOfA2, arrOfB, equalAB))
+	assert.Equal(t, expectDifferenceAB2, Difference(arrOfA, arrOfB2, equalAB))
 }
 
 func TestSymmetricDifference(t *testing.T) {
