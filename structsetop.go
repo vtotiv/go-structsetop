@@ -64,8 +64,56 @@ func Difference[T any, U any, F ~func(*T, *U) bool](
 	return result
 }
 
-func SymmetricDifference() {
+func SymmetricDifference[T any, U any, F ~func(*T, *U) bool](
+	A []T,
+	B []U,
+	equal F,
+) ([]T, []U) {
 
+	resultA := []T{}
+	resultB := []U{}
+
+	if len(A) == 0 && len(B) == 0 {
+		return resultA, resultB
+	}
+	if len(A) == 0 {
+		for _, b := range B {
+			resultB = append(resultB, b)
+		}
+		return resultA, resultB
+	}
+	if len(B) == 0 {
+		for _, a := range A {
+			resultA = append(resultA, a)
+		}
+		return resultA, resultB
+	}
+
+	matchMapB := make(map[int]struct{})
+
+	for _, a := range A {
+		var inSetB bool
+
+		for idx, b := range B {
+			if equal(&a, &b) {
+				inSetB = true
+				matchMapB[idx] = struct{}{}
+				break
+			}
+
+		}
+		if !inSetB {
+			resultA = append(resultA, a)
+		}
+	}
+
+	for idx, b := range B {
+		if _, ok := matchMapB[idx]; !ok {
+			resultB = append(resultB, b)
+		}
+	}
+
+	return resultA, resultB
 }
 
 func Subset() {
