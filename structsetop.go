@@ -28,6 +28,7 @@ func Intersection[T any, U any, F ~func(*T, *U) bool](
 	return result
 }
 
+// Difference of A\B
 func Difference[T any, U any, F ~func(*T, *U) bool](
 	A []T,
 	B []U,
@@ -64,6 +65,7 @@ func Difference[T any, U any, F ~func(*T, *U) bool](
 	return result
 }
 
+// SymmetricDifference of A and B
 func SymmetricDifference[T any, U any, F ~func(*T, *U) bool](
 	A []T,
 	B []U,
@@ -116,7 +118,7 @@ func SymmetricDifference[T any, U any, F ~func(*T, *U) bool](
 	return resultA, resultB
 }
 
-// Subset, A is subset of B
+// Subset, A is subset of B (not strict)
 func Subset[T any, U any, F ~func(*T, *U) bool](
 	A []T,
 	B []U,
@@ -143,7 +145,7 @@ outer:
 	return true
 }
 
-// Superset, A is superset of B
+// Superset, A is superset of B (not struct)
 func Superset[T any, U any, F ~func(*T, *U) bool](
 	A []T,
 	B []U,
@@ -153,4 +155,23 @@ func Superset[T any, U any, F ~func(*T, *U) bool](
 		return equal(t, u)
 	}
 	return Subset(B, A, switchedEqual)
+}
+
+// Contains element e in Array A
+func Contains[T any, F ~func(*T, *T) bool](
+	e *T,
+	A []T,
+	equal F,
+) bool {
+	if len(A) == 0 {
+		return false
+	}
+
+	for _, a := range A {
+		if equal(&a, e) {
+			return true
+		}
+	}
+
+	return false
 }
