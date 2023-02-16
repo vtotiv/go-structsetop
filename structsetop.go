@@ -1,8 +1,8 @@
+// Package structsetop provides basic set functions on struct arrays
+// by providing a compare function (here equal), arbitrary struct arrays can be used
+// Available operations are Intersection, Difference, SymmetricDifference,
+// non-strict Subset, non-strict Superset and Contains
 package structsetop
-
-func Union() {
-
-}
 
 // Intersection intersects A with B by comparing each element with the given equal func
 func Intersection[T any, U any, F ~func(*T, *U) bool](
@@ -28,7 +28,7 @@ func Intersection[T any, U any, F ~func(*T, *U) bool](
 	return result
 }
 
-// Difference of A\B
+// Difference A\B
 func Difference[T any, U any, F ~func(*T, *U) bool](
 	A []T,
 	B []U,
@@ -118,7 +118,7 @@ func SymmetricDifference[T any, U any, F ~func(*T, *U) bool](
 	return resultA, resultB
 }
 
-// Subset, A is subset of B (not strict)
+// Subset A is subset of B (not strict)
 func Subset[T any, U any, F ~func(*T, *U) bool](
 	A []T,
 	B []U,
@@ -145,7 +145,7 @@ outer:
 	return true
 }
 
-// Superset, A is superset of B (not struct)
+// Superset A is superset of B (not struct)
 func Superset[T any, U any, F ~func(*T, *U) bool](
 	A []T,
 	B []U,
@@ -158,17 +158,17 @@ func Superset[T any, U any, F ~func(*T, *U) bool](
 }
 
 // Contains element e in Array A
-func Contains[T any, F ~func(*T, *T) bool](
-	e *T,
-	A []T,
+func Contains[T any, U any, F ~func(*T, *U) bool](
+	a *T,
+	B []U,
 	equal F,
 ) bool {
-	if len(A) == 0 {
+	if len(B) == 0 {
 		return false
 	}
 
-	for _, a := range A {
-		if equal(&a, e) {
+	for _, b := range B {
+		if equal(a, &b) {
 			return true
 		}
 	}
