@@ -134,14 +134,12 @@ func TestSubset(t *testing.T) {
 	arrOfB1 := []B{{1}, {2}, {3}, {4}}
 	arrOfB2 := []B{}
 	arrOfB3 := []B{{2}, {3}}
-	// arrOfB4 := []B{{4}, {5}, {6}}
 
 	expectSubsetA1B1 := true
 	expectSubsetA1B2 := false
-	expectSubsetA2B1 := true 
+	expectSubsetA2B1 := true
 	expectSubsetA2B2 := true
 	expectSubsetA1B3 := false
-	// expectSubsetA1B4 := 
 
 	equalAB := func(a *A, b *B) bool {
 		return a.va == b.vb
@@ -155,5 +153,27 @@ func TestSubset(t *testing.T) {
 }
 
 func TestSuperset(t *testing.T) {
+	arrOfA1 := []A{{1}, {2}, {3}, {4}}
+	arrOfA2 := []A{{2}, {3}}
+	arrOfA3 := []A{}
+	arrOfB1 := []B{{1}, {2}, {3}}
+	arrOfB2 := []B{}
 
+	expectSupersetA1B1 := true
+	expectSupersetA1B2 := true
+	expectSupersetA2B1 := false
+	expectSupersetA2B2 := true
+	expectSupersetA3B1 := false
+	expectSupersetA3B2 := true
+
+	equalAB := func(a *A, b *B) bool {
+		return a.va == b.vb
+	}
+
+	assert.Equal(t, expectSupersetA1B1, Superset(arrOfA1, arrOfB1, equalAB))
+	assert.Equal(t, expectSupersetA1B2, Superset(arrOfA1, arrOfB2, equalAB))
+	assert.Equal(t, expectSupersetA2B1, Superset(arrOfA2, arrOfB1, equalAB))
+	assert.Equal(t, expectSupersetA2B2, Superset(arrOfA2, arrOfB2, equalAB))
+	assert.Equal(t, expectSupersetA3B1, Superset(arrOfA3, arrOfB1, equalAB))
+	assert.Equal(t, expectSupersetA3B2, Superset(arrOfA3, arrOfB2, equalAB))
 }
