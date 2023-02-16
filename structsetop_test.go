@@ -177,3 +177,22 @@ func TestSuperset(t *testing.T) {
 	assert.Equal(t, expectSupersetA3B1, Superset(arrOfA3, arrOfB1, equalAB))
 	assert.Equal(t, expectSupersetA3B2, Superset(arrOfA3, arrOfB2, equalAB))
 }
+
+func TestContains(t *testing.T) {
+	A0 := A{1}
+	arrOfA1 := []A{{1}, {2}, {3}, {4}}
+	arrOfA2 := []A{{2}, {3}}
+	arrOfA3 := []A{}
+
+	expectContainsA0A1 := true
+	expectContainsA0A2 := false
+	expectContainsA0A3 := false
+
+	equalAA := func(a1 *A, a2 *A) bool {
+		return a1.va == a2.va
+	}
+
+	assert.Equal(t, expectContainsA0A1, Contains(&A0, arrOfA1, equalAA))
+	assert.Equal(t, expectContainsA0A2, Contains(&A0, arrOfA2, equalAA))
+	assert.Equal(t, expectContainsA0A3, Contains(&A0, arrOfA3, equalAA))
+}
