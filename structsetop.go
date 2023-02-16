@@ -116,7 +116,7 @@ func SymmetricDifference[T any, U any, F ~func(*T, *U) bool](
 	return resultA, resultB
 }
 
-// Subset A is subset of B
+// Subset, A is subset of B
 func Subset[T any, U any, F ~func(*T, *U) bool](
 	A []T,
 	B []U,
@@ -129,7 +129,7 @@ func Subset[T any, U any, F ~func(*T, *U) bool](
 		return false
 	}
 
-	outer:
+outer:
 	for _, a := range A {
 		for _, b := range B {
 			if equal(&a, &b) {
@@ -143,7 +143,14 @@ func Subset[T any, U any, F ~func(*T, *U) bool](
 	return true
 }
 
-// Superset A is superset of B
-func Superset() {
-
+// Superset, A is superset of B
+func Superset[T any, U any, F ~func(*T, *U) bool](
+	A []T,
+	B []U,
+	equal F,
+) bool {
+	switchedEqual := func(u *U, t *T) bool {
+		return equal(t, u)
+	}
+	return Subset(B, A, switchedEqual)
 }
