@@ -18,7 +18,6 @@ type C struct {
 }
 
 func TestUnion(t *testing.T) {
-
 }
 
 func TestIntersection(t *testing.T) {

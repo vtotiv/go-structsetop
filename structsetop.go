@@ -1,5 +1,5 @@
 // Package structsetop provides basic set functions on struct arrays
-// by providing a compare function (here equal), arbitrary struct arrays can be used
+// by providing a compare function (here equal), arbitrary struct arrays can be used.
 // Available operations are Intersection, Difference, SymmetricDifference,
 // non-strict Subset, non-strict Superset and Contains
 package structsetop
@@ -34,7 +34,6 @@ func Difference[T any, U any, F ~func(*T, *U) bool](
 	B []U,
 	equal F,
 ) []T {
-
 	result := []T{}
 
 	if len(A) == 0 {
@@ -71,7 +70,6 @@ func SymmetricDifference[T any, U any, F ~func(*T, *U) bool](
 	B []U,
 	equal F,
 ) ([]T, []U) {
-
 	resultA := []T{}
 	resultB := []U{}
 
@@ -102,7 +100,6 @@ func SymmetricDifference[T any, U any, F ~func(*T, *U) bool](
 				matchMapB[idx] = struct{}{}
 				break
 			}
-
 		}
 		if !inSetB {
 			resultA = append(resultA, a)
