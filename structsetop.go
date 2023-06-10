@@ -1,7 +1,7 @@
 // Package structsetop provides basic set functions on struct arrays
 // by providing a compare function (here equal), arbitrary struct arrays can be used.
 // Available operations are Intersection, Difference, SymmetricDifference,
-// non-strict Subset, non-strict Superset and Contains
+// non-strict Subset, non-strict Superset and Contains.
 package structsetop
 
 // Intersection intersects A with B by comparing each element with the given equal func

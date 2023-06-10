@@ -17,9 +17,6 @@ type C struct {
 	vc int
 }
 
-func TestUnion(t *testing.T) {
-}
-
 func TestIntersection(t *testing.T) {
 	arrOfA := []A{{1}, {2}, {3}}
 	arrOfB := []B{{2}, {3}, {4}}
